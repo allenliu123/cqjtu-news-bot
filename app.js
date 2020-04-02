@@ -1,5 +1,6 @@
 process.env.NTBA_FIX_319 = 1;
 var http = require('http');
+let request = require('sync-request');
 let SavedNews10 = require('./apis/SavedNews');
 let TelegramBot = require('node-telegram-bot-api');
 let { crawlNowNews10, crawlNewDetail } = require('./apis');
