@@ -6,7 +6,7 @@ class SavedNews10 {
   // 这是一个单例类
   constructor() {
     if (!SavedNews10.instance) {
-      this.newsList = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+      this.newsList = [];
       SavedNews10.instance = this;
     }
     return SavedNews10.instance;
@@ -26,9 +26,12 @@ class SavedNews10 {
   /**
    * 对比网站上爬取的最新新闻，返回有几条不同 
    * @param { List } nowNewsList 网站上爬取的最新新闻
-   * @return { Number } 返回几，就表示需要插入几条数据，返回 -1 表示没有相同的，需要全部插入
+   * @return { Number } 返回几，就表示需要插入几条数据，返回 10 表示没有相同的，需要全部插入
    */
   compare(nowNewsList) {
+    if(this.newsList.length === 0) {
+      return -1;
+    }
     for(let index = 0; index < nowNewsList.length; index++) {
       if(this.newsList[0].url === nowNewsList[index].url
       && this.newsList[0].title === nowNewsList[index].title) {
