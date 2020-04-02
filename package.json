@@ -1,0 +1,17 @@
+{
+  "name": "cqjtu-news-bot",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "node-telegram-bot-api": "^0.40.0",
+    "sync-request": "^6.1.0"
+  }
+}
