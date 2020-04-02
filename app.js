@@ -1,4 +1,5 @@
 process.env.NTBA_FIX_319 = 1;
+var http = require('http');
 let SavedNews10 = require('./apis/SavedNews');
 let TelegramBot = require('node-telegram-bot-api');
 let { crawlNowNews10, crawlNewDetail } = require('./apis');
@@ -43,8 +44,25 @@ function craw() {
   }
 }
 
+http.createServer(function (req, res) {
+  res.end("I am still run");
+}).listen(process.env.PORT || 5000);
+
+function stillAlive() {
+  let url = 'https://cqjtu-news-bot-heroku.herokuapp.com/';
+  let data = request('get', url, {
+    headers: {
+      'User-Agent': 'Request-Promise'
+    }
+  }).getBody().toString();
+  console.log(data);
+}
+
+craw();
+stillAlive();
 setInterval(function() {
   craw();
+  stillAlive();
 }, 10 * 60 * 1000);
 
 
