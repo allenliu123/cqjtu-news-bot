@@ -56,10 +56,10 @@ function stillAlive() {
 }
 
 craw();
-stillAlive();
+// stillAlive();
 setInterval(function() {
   craw();
-  stillAlive();
+  // stillAlive();
 }, 10 * 60 * 1000);
 
 
