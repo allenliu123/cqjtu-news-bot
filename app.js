@@ -51,11 +51,7 @@ http.createServer(function (req, res) {
 
 function stillAlive() {
   let url = 'https://cqjtu-news-bot-heroku.herokuapp.com/';
-  let data = request('get', url, {
-    headers: {
-      'User-Agent': 'Request-Promise'
-    }
-  }).getBody().toString();
+  let data = request('get', url).getBody().toString();
   console.log(data);
 }
 
