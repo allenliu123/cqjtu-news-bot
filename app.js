@@ -15,7 +15,7 @@ bot.on('text', (msg) => {
 bot.on("polling_error", (err) => console.log(err));
 
 // 爬取
-function craw() {
+function crawl() {
   let nowNewsList = crawlNowNews10();
 
   let savedNews10 = new SavedNews10();
@@ -51,14 +51,19 @@ http.createServer(function (req, res) {
 
 function stillAlive() {
   let url = 'https://cqjtu-news-bot-heroku.herokuapp.com/';
-  let data = request('get', url).getBody().toString();
+  let data = request('get', url, {
+    headers: {
+      'User-Agent': 'Request-Promise'
+    }
+  }).getBody().toString();
   console.log(data);
 }
 
-craw();
-// stillAlive();
+crawl();
+stillAlive();
 setInterval(function() {
-  craw();
+  console.log('start crawl')
+  crawl();
   // stillAlive();
 }, 10 * 60 * 1000);
 
