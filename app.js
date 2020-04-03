@@ -64,7 +64,7 @@ stillAlive();
 setInterval(function() {
   console.log('start crawl')
   crawl();
-  // stillAlive();
+  stillAlive();
 }, 10 * 60 * 1000);
 
 
