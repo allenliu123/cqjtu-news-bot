@@ -1,5 +1,6 @@
 let request = require('sync-request');
 let cheerio = require('cheerio');
+var rp = require('request-promise');
 
 // 爬取 10 条最新新闻
 function crawlNowNews10() {
@@ -39,7 +40,18 @@ function crawlNewDetail(url) {
   }
 }
 
+// 保持程序运行
+function keepAlive() {
+  let options = {
+    uri: 'https://cqjtu-news-bot-heroku.herokuapp.com/'
+  };
+  rp(options).then(data => {
+    console.log(data)
+  });
+}
+
 module.exports = {
   crawlNowNews10: crawlNowNews10,
-  crawlNewDetail: crawlNewDetail
+  crawlNewDetail: crawlNewDetail,
+  keepAlive: keepAlive
 }

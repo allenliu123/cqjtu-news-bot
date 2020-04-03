@@ -3,7 +3,7 @@ var http = require('http');
 let request = require('sync-request');
 let SavedNews10 = require('./apis/SavedNews');
 let TelegramBot = require('node-telegram-bot-api');
-let { crawlNowNews10, crawlNewDetail } = require('./apis');
+let { crawlNowNews10, crawlNewDetail, keepAlive } = require('./apis');
 
 const token = process.env.token || require('./config').token;
 const bot = new TelegramBot(token, {polling: true});
@@ -26,13 +26,13 @@ function crawl() {
 
   // 如果 count === -1 就把爬取的 10 个新闻保存到 savedNews10 里面，不要推到 Telegram
   if(count < 0) {
+    console.log('restart');
     for(let i = 9; i >= 0; i--) {
       let news = crawlNewDetail(nowNewsList[i].url)
       Object.assign(news, nowNewsList[i]);
       savedNews10.push(news);
-      console.log('restart');
-      console.log(savedNews10.get());
     }
+    console.log(savedNews10.get());
   } else {
     for(let i = count-1; i >= 0; i--) {
       let news = crawlNewDetail(nowNewsList[i].url)
@@ -49,22 +49,12 @@ http.createServer(function (req, res) {
   res.end("I am still run");
 }).listen(process.env.PORT || 5000);
 
-function stillAlive() {
-  let url = 'https://cqjtu-news-bot-heroku.herokuapp.com/';
-  let data = request('get', url, {
-    headers: {
-      'User-Agent': 'Request-Promise'
-    }
-  }).getBody().toString();
-  console.log(data);
-}
-
 crawl();
-stillAlive();
+keepAlive();
 setInterval(function() {
   console.log('start crawl')
   crawl();
-  stillAlive();
-}, 10 * 60 * 1000);
+  keepAlive();
+}, 30 * 60 * 1000);
 
 
