@@ -50,11 +50,11 @@ http.createServer(function (req, res) {
 }).listen(process.env.PORT || 5000);
 
 crawl();
-keepAlive();
+// keepAlive();
 setInterval(function() {
   console.log('start crawl')
   crawl();
-  keepAlive();
+  // keepAlive();
 }, 30 * 60 * 1000);
 
 
