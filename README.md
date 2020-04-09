@@ -1,0 +1,1 @@
+# cqjtu-news-bot
