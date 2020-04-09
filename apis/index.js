@@ -34,7 +34,8 @@ function crawlNewDetail(url) {
   }).getBody().toString();
   let $ = cheerio.load(html);
   return {
-    type: $('.currt-nav')[0].children[3].children[0].data || '',
+    // type: $('.currt-nav')[0].children[3].children[0].data || '',
+    
     time: $('.article-editor p')[0].children[2].data.trim() || '',
     content: 'content'
   }
