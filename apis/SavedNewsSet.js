@@ -37,7 +37,7 @@ class SavedNewsSet {
       this.newsSet.forEach(item => {
         if(item.url === nowNewsList[index].url && item.title === nowNewsList[index].title) {
           isHere = true;
-          break;
+          return;
         }
       })
       if(!isHere) {
