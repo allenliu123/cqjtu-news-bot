@@ -16,6 +16,8 @@ bot.on("polling_error", (err) => console.log(err));
 
 // 爬取
 function crawl() {
+  console.log('start crawl')
+
   let nowNewsList = crawlNowNews10();
 
   let newsSet = new SavedNewsSet();
@@ -40,7 +42,6 @@ http.createServer(function (req, res) {
 crawl();
 keepAlive();
 setInterval(function() {
-  console.log('start crawl')
   crawl();
   keepAlive();
 }, 30 * 60 * 1000);

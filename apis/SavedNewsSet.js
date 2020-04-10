@@ -32,18 +32,18 @@ class SavedNewsSet {
       return null;
     }
     let newNews = [];
-    this.newsSet.forEach(item => {
+    for(let index = 0; index < nowNewsList.length; index++) {
       let isHere = false;
-      for(let index = 0; index < nowNewsList.length; index++) {
+      this.newsSet.forEach(item => {
         if(item.url === nowNewsList[index].url && item.title === nowNewsList[index].title) {
           isHere = true;
           break;
         }
-      }
+      })
       if(!isHere) {
         newNews.push(nowNewsList[index]);
       }
-    })
+    }
     
     for(let index = 0; index < newNews.length; index++) {
       this.newsSet.add(newNews[index]);
